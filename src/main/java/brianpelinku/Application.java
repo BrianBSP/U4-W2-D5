@@ -4,7 +4,6 @@ import brianpelinku.enums.Genere;
 import brianpelinku.enums.Periodico;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -60,47 +59,49 @@ public class Application {
         }*/
 
         // aggiungi un testo(libro/rivista) nel catalogo da scanner
-        System.out.println("Inserisci il tipo di elemento che vuoi aggiungere al catalogo:\n1. Libro\n2. Rivista");
-        int tipo = Integer.parseInt(scanner.nextLine());
+        for (int i = 0; i < 5; i++) {
+            System.out.println("Inserisci il tipo di elemento che vuoi aggiungere al catalogo:\n1. Libro\n2. Rivista");
+            int tipo = Integer.parseInt(scanner.nextLine());
 
-        int isbn = random.nextInt(1000, 10000000);
-        System.out.println("Codice ISBN: " + isbn);
+            int isbn = random.nextInt(1000, 10000000);
+            System.out.println("Codice ISBN: " + isbn);
 
-        System.out.println("Inserisci il titolo: ");  // non mi fa inserire da scanner il titolo
-        String titolo = scanner.nextLine();
+            System.out.println("Inserisci il titolo: ");  // non mi fa inserire da scanner il titolo
+            String titolo = scanner.nextLine();
 
-        System.out.println("Inserisci L'anno di pubblicazione: ");
-        int annoPubb = Integer.parseInt(scanner.nextLine());
+            System.out.println("Inserisci L'anno di pubblicazione: ");
+            int annoPubb = Integer.parseInt(scanner.nextLine());
 
-        System.out.println("Inserisci il numero delle pagine: ");
-        int numPag = Integer.parseInt(scanner.nextLine());
+            System.out.println("Inserisci il numero delle pagine: ");
+            int numPag = Integer.parseInt(scanner.nextLine());
 
-        if (tipo == 1) {
-            System.out.println("Inserisci l'autore: ");
-            String autore = scanner.nextLine();
+            if (tipo == 1) {
+                System.out.println("Inserisci l'autore: ");
+                String autore = scanner.nextLine();
 
-            System.out.println("Inserisci il genere: 1.ROMANTICO 2.THRILLER 3.GIALLO 4.HORROR 5.AVVENTURA 6.FANTASY");
-            int gen = Integer.parseInt(scanner.nextLine());
-            Genere genere = switch (gen) {
-                case 1 -> Genere.ROMANTICO;
-                case 2 -> Genere.THRILLER;
-                case 3 -> Genere.GIALLO;
-                case 4 -> Genere.HORROR;
-                case 5 -> Genere.AVVENTURA;
-                case 6 -> Genere.FANTASY;
-                default -> null;
-            };
-            catalogoBiblioteca.aggiungiTesto(new Libro(isbn, titolo, annoPubb, numPag, autore, genere));
-        } else {
-            System.out.println("Inserisci la periodicità: 1. SETTIMANALE 2. MENSILE 3. SEMESTRALE");
-            int periodo = Integer.parseInt(scanner.nextLine());
-            Periodico periodico = switch (periodo) {
-                case 1 -> Periodico.SETTIMANALE;
-                case 2 -> Periodico.MENSILE;
-                case 3 -> Periodico.SEMETRALE;
-                default -> null;
-            };
-            catalogoBiblioteca.aggiungiTesto(new Rivista(isbn, titolo, annoPubb, numPag, periodico));
+                System.out.println("Inserisci il genere: 1.ROMANTICO 2.THRILLER 3.GIALLO 4.HORROR 5.AVVENTURA 6.FANTASY");
+                int gen = Integer.parseInt(scanner.nextLine());
+                Genere genere = switch (gen) {
+                    case 1 -> Genere.ROMANTICO;
+                    case 2 -> Genere.THRILLER;
+                    case 3 -> Genere.GIALLO;
+                    case 4 -> Genere.HORROR;
+                    case 5 -> Genere.AVVENTURA;
+                    case 6 -> Genere.FANTASY;
+                    default -> null;
+                };
+                catalogoBiblioteca.aggiungiTesto(new Libro(isbn, titolo, annoPubb, numPag, autore, genere));
+            } else {
+                System.out.println("Inserisci la periodicità: 1. SETTIMANALE 2. MENSILE 3. SEMESTRALE");
+                int periodo = Integer.parseInt(scanner.nextLine());
+                Periodico periodico = switch (periodo) {
+                    case 1 -> Periodico.SETTIMANALE;
+                    case 2 -> Periodico.MENSILE;
+                    case 3 -> Periodico.SEMETRALE;
+                    default -> null;
+                };
+                catalogoBiblioteca.aggiungiTesto(new Rivista(isbn, titolo, annoPubb, numPag, periodico));
+            }
         }
         // stampo per vedere se mi effettivamente aggiunto il libro
         for (Testo catalogo : catalogoBiblioteca.getCatalogo()) {
@@ -111,11 +112,22 @@ public class Application {
         int isbnRimuovi = Integer.parseInt(scanner.nextLine());
         catalogoBiblioteca.eliminaTesto(isbnRimuovi);
 
+        // stampo per vedere se mi effettivamente aggiunto il libro
+        for (Testo catalogo : catalogoBiblioteca.getCatalogo()) {
+            System.out.println(catalogo);
+        }
+
         // cerca per ISBN
         System.out.println("Cerca per ISBN: ");
         int isbnCerca = Integer.parseInt(scanner.nextLine());
-        Optional<CatalogoBiblioteca> testo = catalogoBiblioteca.cercaPerIsbn(isbnCerca);
-        testo.ifPresent(System.out::println);
+        List<Testo> testi = catalogoBiblioteca.cercaPerIsbn(isbnCerca);
+        testi.forEach(System.out::println);
+
+        // cerca per anno di pubblicazione
+        System.out.println("Cerca per anno di pubblicazione: ");
+        int annoCerca = Integer.parseInt(scanner.nextLine());
+        List<Testo> elementi = catalogoBiblioteca.cercaPerAnnoPubblicazione(annoCerca);
+        elementi.forEach(System.out::println);
 
         // cerca per nome autore
         System.out.println("Inserisci il nome dell'autore che vuoi cercare: ");

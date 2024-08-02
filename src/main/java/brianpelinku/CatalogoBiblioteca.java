@@ -30,13 +30,13 @@ public class CatalogoBiblioteca {
     }
 
     // ricerca per ISBN
-    public String cercaPerIsbn(int codiceIsbn) {
-        return catalogo.stream().filter(testo -> testo.getCodiceIsbn() == codiceIsbn).toString();
+    public List<Testo> cercaPerIsbn(int codiceIsbn) {
+        return catalogo.stream().filter(testo -> testo.getCodiceIsbn() == codiceIsbn).toList();
     }
 
     // ricerca per anno di pubblicazione
-    public String cercaPerAnnoPubblicazione(int annoPubblicazione) {
-        return String.valueOf(catalogo.stream().filter(testo -> testo.getAnnoPubblicazione() == annoPubblicazione).findFirst());
+    public List<Testo> cercaPerAnnoPubblicazione(int annoPubblicazione) {
+        return catalogo.stream().filter(testo -> testo.getAnnoPubblicazione() == annoPubblicazione).toList();
     }
 
     // ricerca per autore
