@@ -3,6 +3,7 @@ package brianpelinku;
 import brianpelinku.enums.Genere;
 import brianpelinku.enums.Periodico;
 
+import java.io.File;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
@@ -135,7 +136,8 @@ public class Application {
         List<Libro> libri = catalogoBiblioteca.ricercaPerAutore(autoreCerca);
         libri.forEach(System.out::println);
 
-        //
+        // salvataggio su disco
+        File catalogoFile = new File("src/catalogo.txt");
 
 
     }
