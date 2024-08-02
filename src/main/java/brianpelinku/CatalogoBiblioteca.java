@@ -69,14 +69,14 @@ public class CatalogoBiblioteca {
         }
 
         try {
-            FileUtils.writeStringToFile(file,stringa.toString(), StandardCharsets.UTF_8,true);
+            FileUtils.writeStringToFile(file, stringa.toString(), StandardCharsets.UTF_8, true);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
     }
     // caricamento da disco in una nuova lista
-    public void leggiCatalogoSuDisco(File file, List<CatalogoBiblioteca> catalogoBiblioteca) throws IOException {
+    /*public void leggiCatalogoSuDisco(File file, List<CatalogoBiblioteca> catalogoBiblioteca) throws IOException {
         try {
             String contenutoFileCatalogo = FileUtils.readFileToString(file,StandardCharsets.UTF_8);
             String[] arrayContenutoFileCatalogo = contenutoFileCatalogo.split(System.lineSeparator());
@@ -89,7 +89,7 @@ public class CatalogoBiblioteca {
             throw new RuntimeException(e);
         }
 
-    }
+    }*/
 
 
 }
