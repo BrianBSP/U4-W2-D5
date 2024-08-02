@@ -6,10 +6,11 @@ public class Rivista extends Testo {
     // attributi
     Periodico periodico;
 
-    public Rivista(String titolo, int annoPubblicazione, int numPagine, Periodico periodico) {
-        super(titolo, annoPubblicazione, numPagine);
+    public Rivista(int codiceIsbn, String titolo, int annoPubblicazione, int numPagine, Periodico periodico) {
+        super(codiceIsbn, titolo, annoPubblicazione, numPagine);
         this.periodico = periodico;
     }
+
 
     public Periodico getPeriodico() {
         return periodico;
@@ -17,7 +18,9 @@ public class Rivista extends Testo {
 
     @Override
     public String toString() {
-        return "-------------Rivista-----------\n{" +
+        return super.toString() +
+                "\nRivista" +
+                "\n{" +
                 "periodico= " + periodico +
                 '}';
     }
